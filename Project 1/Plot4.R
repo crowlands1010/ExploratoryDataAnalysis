@@ -25,7 +25,7 @@ par(mfrow=c(2,2),mar=c(4,4,2,1),oma=c(0,0,2,0))
 with(consumptionDates, {
   plot(Global_active_power~DateTime, type="l",xlab="",ylab="Global Active Power (kilowatts)")
   plot(Voltage~DateTime, type="l",xlab="datetime",ylab="Voltage (volt)")
-  plot(Sub_metering_1~DateTime, type="l",xlab="datetime",ylab="")
+  plot(Sub_metering_1~DateTime, type="l",xlab="",ylab="Energy sub metering")
   lines(Sub_metering_2~DateTime,col='Red')
   lines(Sub_metering_3~DateTime,col='Blue')
   legend("topright", col=c("black", "red", "blue"), lty=1, lwd=2, bty="n",
