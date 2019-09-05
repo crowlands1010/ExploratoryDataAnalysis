@@ -21,6 +21,11 @@ hist(specConsumption$Global_active_power,main="Global Active Power",
      xlab="Global Active Power (kilowatts)",ylab="Frequency",col="red",
      )
 
+## Date comparison between full dataset and specified date
+## hist(consumption$Global_active_power,main="Global Active Power",
+##     xlab="Global Active Power (kilowatts)",ylab="Frequency",col="red",
+## )
+
 ## Export to .png
 dev.copy(png,file="plot1.png")
 dev.off()
