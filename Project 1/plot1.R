@@ -4,7 +4,7 @@ txtFile <- "./household_power_consumption.txt"
 url       <- "http://d396qusza40orc.cloudfront.net/exdata%2Fdata%2Fhousehold_power_consumption.zip"
 zipFile  <- "./household_power_consumption.zip"
 
-# Check if the data is downloaded and download when applicable
+# Check if file has been downloaded, if not then download.
 if (!file.exists("./household_power_consumption.txt")) {
   download.file(url, destfile = zipFile)
   unzip(zipFile)
