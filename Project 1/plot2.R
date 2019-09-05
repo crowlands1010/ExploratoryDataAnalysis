@@ -19,8 +19,10 @@ consumptionDates$Date <- as.Date(consumptionDates$Date,format="%d/%m/%Y")
 dateTime <- paste(consumptionDates$Date,consumptionDates$Time)
 consumptionDates$DateTime <- as.POSIXct(dateTime)
 
-## Export to .png
+## Plot Data
 plot(consumptionDates$Global_active_power~consumptionDates$DateTime,type="l",
      xlab="",ylab="Global Active Power (kilowatts)")
+
+## Export to .png
 dev.copy(png,file="plot2.png",height=480,width=480)
 dev.off()
