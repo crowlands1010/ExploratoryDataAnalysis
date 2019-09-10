@@ -12,5 +12,10 @@ Contains notes from Lessons 1 and 2 in week two.
   - ggplot2
 
 ### Week Three
+Contains notes from lessons 1, 2, and 3 from week 3.
+  - Hierarchial Clustering
+  - K-Means Clustering
+  - Dimension Reduction
+  - Working with Color in R Plots
 
 ### Week Four
