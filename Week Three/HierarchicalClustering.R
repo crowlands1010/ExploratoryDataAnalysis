@@ -39,3 +39,9 @@ dataFrame <- data.frame(x = x, y = y)
 distxy <- dist(dataFrame)
 hClustering <- hclust(distxy)
 myplclust(hClustering, lab = rep(1:3, each = 4), lab.col = rep(1:3, each = 4))
+
+##heatmap function
+dataFrame <- data.frame(x = x, y = y)
+set.seed(143)
+dataMatrix <- as.matrix(dataFrame)[sample(1:12), ]
+heatmap(dataMatrix)
