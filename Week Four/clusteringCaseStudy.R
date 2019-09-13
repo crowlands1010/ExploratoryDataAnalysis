@@ -45,3 +45,18 @@ names(samsungData)[maxContrib]
 ##K-means clustering (nstart=1,first try)
 kClust <- kmeans(sub1[, -c(562,563)],centers=6)
 table(kClust$cluster,sub1$activity)
+
+##K-means clustering (nstart=1,second try)
+kClust <- kmeans(sub1[, -c(562,563)],centers=6)
+table(kClust$cluster,sub1$activity)
+
+##K-means clustering (nstart=100,first try)
+kClust <- kmeans(sub1[, -c(562,563)],centers=6,nstart=100)
+table(kClust$cluster,sub1$activity)
+
+##K-means clustering (nstart=100,second try)
+kClust <- kmeans(sub1[, -c(562,563)],centers=6,nstart=100)
+table(kClust$cluster,sub1$activity)
+
+##CLuster 1 Variable Centers (Laying)
+plot(kClust$center[1,1:10],pch=19,ylab="Cluster Center",xlab="")
