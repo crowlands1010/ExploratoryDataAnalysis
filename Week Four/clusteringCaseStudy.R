@@ -32,3 +32,16 @@ plot(svd1$u[, 2],col=sub1$activity,pch=19)
 
 ##Find maximum contributor
 plot(svd1$v[, 2],pch=19)
+
+##New clustering with maximum contributor
+maxContrib <- which.max(svd1$v[, 2])
+distanceMatrix <- dist(sub1[, c(10:12,maxContrib)])
+hclustering <- hclust(distanceMatrix)
+myplclust(hclustering,lab.col=unclass(sub1$activity))
+
+##New clustering with maximum contributor
+names(samsungData)[maxContrib]
+
+##K-means clustering (nstart=1,first try)
+kClust <- kmeans(sub1[, -c(562,563)],centers=6)
+table(kClust$cluster,sub1$activity)
