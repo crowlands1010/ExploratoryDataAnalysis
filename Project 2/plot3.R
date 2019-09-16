@@ -1,5 +1,5 @@
 library(ggplot2)
-library(dplyr)
+library(plyr)
 
 ## Download and extract zip file
 if (!file.exists("data")) {
@@ -17,18 +17,15 @@ summarySCC <- readRDS(file="data/summarySCC_PM25.rds")
 
 ##Merge files
 totalSCC <- merge(SCC,summarySCC)
-totalSCC$year <- as.factor(totalSCC$year)
 
 ## Of the four types of sources indicated by the type (point, nonpoint, onroad, nonroad) 
-## vtotalSCCariable, which of these four sources have seen decreases in emissions from 1999-2008 
+## variable, which of these four sources have seen decreases in emissions from 1999-2008 
 ## for Baltimore City? Which have seen increases in emissions from 1999-2008? Use the 
 ## ggplot2 plotting system to make a plot answer this question.
-Baltimore <- filter(totalSCC,fips=="24510")
-baltimoreEmissions <- ggplot(Baltimore, aes(year, Emissions))+
-  labs(title="Fine Particulate Emissions - Baltimore City")+
-   xlab("Years") + ylab("Total PM2.5 emitted (tons)")+scale_size_identity(0.1)
-plot3 <- baltimoreEmissions+geom_bar(stat="identity", fill="purple") +facet_grid(.~type) 
-print(plot3)
+subEmissions <- subset(totalSCC,fips="24510")
+g <- ggplot(subEmissions,aes(year,Emissions,color=type))
+g+geom_line(stat="summary",fun.y="sum")+labs(main="Fine Particulate Emissions - Baltimore City",
+                                             xlab="Year",ylab="Total PM2.5 emitted (tons)")
 
 ##Export to .png
 dev.copy(png,file="plot3.png",height=480,width=480)

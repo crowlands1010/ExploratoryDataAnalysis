@@ -1,5 +1,5 @@
 library(ggplot2)
-library(dplyr)
+library(plyr)
 
 ## Download and extract zip file
 if (!file.exists("data")) {
@@ -17,16 +17,17 @@ summarySCC <- readRDS(file="data/summarySCC_PM25.rds")
 
 ##Merge files
 totalSCC <- merge(SCC,summarySCC)
-totalSCC$year <- as.factor(totalSCC$year)
 
 
 ## Have total emissions from PM2.5 decreased in the Baltimore City, Maryland 
-## (\color{red}{\verb|fips == "24510"|}fips=="24510") from 1999 to 2008? Use 
-## the base plotting system to make a plot answering this question.
-Baltimore <- filter(totalSCC,fips=="24510")
-baltimoreEmissions <- tapply(Baltimore$Emissions,Baltimore$year,sum)
-plot2 <- barplot(baltimoreEmissions,main="Fine Particulate Emissions - Baltimore",
-                 col="Green",xlab="Years",ylab="Total PM2.5 emitted (tons)")
+## (fips=="24510") from 1999 to 2008? Use the base plotting system to make a
+## plot answering this question.
+BaltimoreCity <- subset(totalSCC, fips == "24510")
+
+totalEmissions <- tapply(totalSCC$Emissions,totalSCC$year,sum)
+plot(names(totalEmissions),totalEmissions,type="l",
+     xlab="Year",ylab="Total PM2.5 emitted (tons)",
+     col="#31a354",main=expression("Fine Particulate Emissions - Baltimore City"))
 
 ##Export to .png
 dev.copy(png,file="plot2.png",height=480,width=480)

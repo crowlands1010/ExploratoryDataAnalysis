@@ -1,5 +1,5 @@
 library(ggplot2)
-library(dplyr)
+library(plyr)
 
 ## Download and extract zip file
 if (!file.exists("data")) {
@@ -17,17 +17,14 @@ summarySCC <- readRDS(file="data/summarySCC_PM25.rds")
 
 ##Merge files
 totalSCC <- merge(SCC,summarySCC)
-totalSCC$year <- as.factor(totalSCC$year)
 
 ##Have total emissions from PM2.5 decreased in the United States from 1999 to 2008? 
 ##Using the base plotting system, make a plot showing the total PM2.5 emission from 
 ##all sources for each of the years 1999, 2002, 2005, and 2008.
-totalEmissions <- tapply(summarySCC$Emissions,summarySCC$year,sum)
-totalEmissions <- barplot(totalEmissions,main="Fine Particulate Emissions US",col="blue",
-                          xlab="Years",ylab="Total PM2.5 emitted (tons)")
-
-plot1 <- totalEmissions
-print(plot1)
+totalEmissions <- tapply(totalSCC$Emissions,totalSCC$year,sum)
+plot(names(totalEmissions),totalEmissions,type="l",
+     xlab="Year",ylab="Total PM2.5 emitted (tons)",
+     col="#31a354",main=expression("Fine Particulate Emissions - US"))
 
 ##Export to .png
 dev.copy(png,file="plot1.png",height=480,width=480)
