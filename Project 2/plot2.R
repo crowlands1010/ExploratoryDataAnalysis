@@ -22,12 +22,13 @@ totalSCC <- merge(SCC,summarySCC)
 ## Have total emissions from PM2.5 decreased in the Baltimore City, Maryland 
 ## (fips=="24510") from 1999 to 2008? Use the base plotting system to make a
 ## plot answering this question.
-BaltimoreCity <- subset(totalSCC, fips == "24510")
+Baltimore <- subset(totalSCC, totalSCC$fips == "24510")
 
-totalEmissions <- tapply(totalSCC$Emissions,totalSCC$year,sum)
-plot(names(totalEmissions),totalEmissions,type="l",
-     xlab="Year",ylab="Total PM2.5 emitted (tons)",
-     col="#31a354",main=expression("Fine Particulate Emissions - Baltimore City"))
+totalBaltimore <- aggregate(Emissions ~ year, Baltimore, sum)
+
+plot(totalBaltimore$year, totalBaltimore$Emissions, 
+     type="l",main="Fine Particulate Emissions - Baltimore City", 
+     xlab="Year",ylab="Total PM2.5 emitted (tons)",col="#31a354")
 
 ##Export to .png
 dev.copy(png,file="plot2.png",height=480,width=480)

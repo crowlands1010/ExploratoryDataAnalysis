@@ -24,8 +24,8 @@ totalSCC <- merge(SCC,summarySCC)
 ## ggplot2 plotting system to make a plot answer this question.
 subEmissions <- subset(totalSCC,fips="24510")
 g <- ggplot(subEmissions,aes(year,Emissions,color=type))
-g+geom_line(stat="summary",fun.y="sum")+labs(main="Fine Particulate Emissions - Baltimore City",
-                                             xlab="Year",ylab="Total PM2.5 emitted (tons)")
+g+geom_line(stat="summary",fun.y="sum")+labs(title="Fine Particulate Emissions - Baltimore City",
+                                             x="Year",y="Total PM2.5 emitted (tons)")
 
 ##Export to .png
 dev.copy(png,file="plot3.png",height=480,width=480)
